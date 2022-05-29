@@ -1,0 +1,94 @@
+
+is_target()
+{
+  IfWinActive,ahk_class ConsoleWindowClass ; Cygwin
+    Return 1 
+  IfWinActive,ahk_exe WindowsTerminal.exe ; Windows Terminal
+    Return 1
+  IfWinActive,ahk_class MEADOW ; Meadow
+    Return 1 
+  IfWinActive,ahk_class cygwin/x X rl-xterm-XTerm-0
+    Return 1
+  IfWinActive,ahk_class MozillaUIWindowClass ; keysnail on Firefox
+    Return 1
+  IfWinActive,ahk_class VMwareUnityHostWndClass
+    Return 1
+  IfWinActive,ahk_class Vim ; GVIM
+    Return 1
+  Return 0
+}
+
+key_del()
+{
+  If is_target()
+    Send {Blind}^d
+  Else
+    Send {Blind}{Del}
+  Return
+}
+
+key_home()
+{
+  If is_target()
+    Send {Blind}^a
+  Else
+    Send {Blind}{HOME}
+  Return
+}
+key_end()
+{
+  If is_target()
+    Send {Blind}^e
+  Else
+    Send {Blind}{END}
+  Return
+}
+key_up()
+{
+  If is_target()
+    Send {Blind}^p
+  Else
+    Send {Blind}{Up}
+  Return
+}
+key_down()
+{
+  If is_target()
+    Send {Blind}^n
+  Else
+    Send {Blind}{Down}
+  Return
+}
+key_right()
+{
+  If is_target()
+    Send {Blind}^f
+  Else
+    Send {Blind}{Right}
+  Return
+}
+key_left()
+{
+  If is_target()
+    Send {Blind}^b
+  Else
+    Send {Blind}{Left}
+  Return
+}
+
+
+F13 & e::key_end()
+F13 & p::key_up()
+F13 & a::key_home()
+F13 & f::key_right()
+F13 & b::key_left()
+F13 & n::key_down()
+F13 & d::key_del()
+
+F13 & LButton::Send {Blind}^{LButton}
+F13 & RButton::Send {Blind}^{RButton}
+F13 & MButton::Send {Blind}^{MButton}
+F13 & WheelDown::Send {Blind}^{WheelDown}
+F13 & WheelUp::Send {Blind}^{WheelUp}
+F13 & WheelLeft::Send {Blind}^{WheelLeft}
+F13 & WheelRight::Send {Blind}^{WheelRight}
